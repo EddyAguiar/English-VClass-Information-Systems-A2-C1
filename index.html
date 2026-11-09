@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="description" content="Tech Interview Flashcards — Information Systems • A2–C1">
+<title>Tech Interview Flashcards • Information Systems • A2–C1</title>
+<style>
+:root{
+  --primary:#0b3d4f;
+  --secondary:#1a7a8c;
+  --accent:#f4b942;
+  --light:#f4f7fb;
+  --dark:#17202a;
+  --muted:#667085;
+  --green:#16803c;
+  --green-bg:#eaf7ee;
+  --red:#c62828;
+  --red-bg:#fdecec;
+  --white:#fff;
+  --shadow:0 8px 24px rgba(11,61,79,.10);
+  --radius:20px;
+  --code-bg:#1e2a33;
+  --code-fg:#e6edf3;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,Helvetica,sans-serif;
+  background:var(--light);
+  color:var(--dark);
+  line-height:1.65;
+  font-size:17px;
+}
+header{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:white;
+  padding:30px 16px 38px;
+}
+.header-inner{max-width:1000px;margin:auto}
+.brand{font-weight:800;letter-spacing:.5px;font-size:1.05rem}
+header h1{font-size:clamp(1.7rem,5vw,2.8rem);line-height:1.15;margin:12px 0 8px}
+header p{margin:0;opacity:.95;font-size:1rem}
+.progress-wrap{margin-top:22px;background:rgba(255,255,255,.2);border-radius:99px;height:10px;overflow:hidden}
+.progress{width:10%;height:100%;background:var(--accent);border-radius:99px;transition:width .5s ease}
+nav{
+  position:sticky;top:0;z-index:20;
+  background:white;border-bottom:1px solid #e5e7eb;
+  overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;
+}
+nav .nav-inner{max-width:1000px;margin:auto;display:flex}
+nav a{
+  display:inline-block;padding:13px 16px;color:var(--primary);
+  text-decoration:none;font-weight:700;font-size:.9rem;
+}
+nav a.done::after{content:" ✓";color:var(--green);font-weight:800}
+main{max-width:1000px;margin:auto;padding:20px 14px 60px}
+.card{
+  background:white;border-radius:var(--radius);padding:24px;
+  margin:20px 0;box-shadow:var(--shadow);
+}
+.card h2{color:var(--primary);margin-top:0;font-size:clamp(1.3rem,3.5vw,1.6rem)}
+.card h3{color:var(--secondary);margin-bottom:8px}
+.badge{
+  display:inline-block;background:#e8f2fb;color:var(--primary);
+  padding:5px 12px;border-radius:999px;font-size:.8rem;font-weight:800;
+}
+.goal-list{padding-left:22px}
+.goal-list li{margin:8px 0}
+.example{
+  background:#f8fafc;border-left:5px solid var(--secondary);
+  padding:14px 16px;margin:14px 0;border-radius:10px;
+}
+.example-audio{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.audio-btn{
+  background:#eaf0f6;border:1px solid #d0d9e6;
+  border-radius:30px;padding:6px 14px;font-size:.8rem;
+  font-weight:700;color:var(--primary);cursor:pointer;
+  display:inline-flex;align-items:center;gap:5px;transition:.15s;
+  min-height:36px;
+}
+.audio-btn:hover{background:#d0d9e6}
+.audio-btn.playing{background:var(--secondary);color:white;border-color:var(--secondary)}
+.en{font-weight:700;color:var(--primary)}
+.pt{color:var(--muted)}
+.tip{
+  background:#fff8e7;border-left:5px solid var(--accent);
+  padding:16px;border-radius:10px;margin-top:16px;
+}
+.exercise{
+  border:1px solid #e3e8ef;border-radius:16px;padding:18px;margin:16px 0;
+}
+input[type="text"],textarea,select{
+  width:100%;padding:14px;border:1px solid #ccd5df;border-radius:12px;
+  font:inherit;background:white;font-size:1rem;
+}
+textarea{min-height:120px;resize:vertical}
+button{
+  border:0;border-radius:12px;padding:14px 20px;
+  background:var(--primary);color:white;font-weight:800;
+  cursor:pointer;font-size:1rem;min-height:48px;
+  transition:.15s;
+}
+button:hover{filter:brightness(1.08)}
+button.secondary{background:var(--secondary)}
+button.light{background:#eaf0f6;color:var(--primary)}
+button.accent{background:var(--accent);color:var(--dark)}
+.feedback{
+  margin-top:12px;padding:14px;border-radius:12px;font-weight:700;display:none;
+}
+.feedback.correct{display:block;background:var(--green-bg);color:var(--green)}
+.feedback.wrong{display:block;background:var(--red-bg);color:var(--red)}
+.option{
+  display:block;width:100%;text-align:left;margin:10px 0;
+  background:#f5f7fa;color:var(--dark);border:1px solid #dce2e9;
+  font-size:.95rem;line-height:1.5;padding:14px 16px;
+}
+.option.correct{background:var(--green-bg);border-color:#9ed7ae;color:var(--green)}
+.option.wrong{background:var(--red-bg);border-color:#efaaaa;color:var(--red)}
+.option:disabled{cursor:default;opacity:1}
+.score{
+  text-align:center;background:#eef4fa;border-radius:18px;padding:24px;
+  margin-top:20px;
+}
+.score strong{font-size:2.4rem;color:var(--primary)}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+table{width:100%;border-collapse:collapse;min-width:520px}
+th,td{padding:14px 12px;border-bottom:1px solid #e8ebef;text-align:left;font-size:.92rem}
+th{background:#eef4fa;color:var(--primary)}
+footer{
+  text-align:center;margin-top:30px;padding:30px 16px;
+  color:#777;background:white;border-top:1px solid #e5e7eb;
+}
+footer .copyright{font-weight:700}
+.small{font-size:.88rem;color:var(--muted)}
+.hidden{display:none}
+
+/* ================================================================
+   FLASHCARD GRID — large, touch-friendly
+   ================================================================ */
+.fc-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:18px;
+  margin:22px 0;
+}
+@media(max-width:700px){
+  .fc-grid{grid-template-columns:1fr}
+}
+
+.fc-card{
+  background:white;
+  border-radius:20px;
+  border:2px solid #e3e8ef;
+  padding:0;
+  overflow:hidden;
+  transition:.2s;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+}
+.fc-card:hover{box-shadow:0 10px 28px rgba(11,61,79,.14);border-color:#c5d5e8}
+.fc-card.completed{border-color:var(--green);background:#f6fdf8}
+
+.fc-header{
+  padding:18px 18px 12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.fc-header .fc-icon{font-size:1.8rem;flex-shrink:0;line-height:1}
+.fc-header .fc-title-wrap{flex:1}
+.fc-header .fc-topic{
+  font-size:.72rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.6px;color:var(--muted);margin-bottom:2px;
+}
+.fc-header .fc-question{
+  font-size:1.05rem;font-weight:700;color:var(--primary);
+  line-height:1.35;
+}
+.fc-header .fc-toggle{
+  font-size:1.4rem;color:var(--secondary);
+  transition:transform .25s;flex-shrink:0;
+}
+.fc-card.open .fc-toggle{transform:rotate(180deg)}
+
+.fc-level{
+  display:inline-block;font-size:.68rem;font-weight:800;
+  padding:3px 10px;border-radius:999px;margin:0 18px 10px;
+  letter-spacing:.3px;
+}
+.lvl-a2{background:#e3f2fd;color:#0d47a1}
+.lvl-b1{background:#e8f5e9;color:#1b5e20}
+.lvl-b2{background:#fff3e0;color:#e65100}
+.lvl-c1{background:#fce4ec;color:#880e4f}
+
+.fc-body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+  padding:0 18px;
+}
+.fc-card.open .fc-body{
+  max-height:1200px;
+  padding:0 18px 18px;
+}
+
+.fc-step{
+  background:#f8fafc;
+  border-radius:12px;
+  padding:14px 16px;
+  margin:10px 0;
+  border-left:4px solid var(--secondary);
+  animation:fadeIn .35s ease;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.fc-step .step-label{
+  font-size:.7rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.6px;margin-bottom:6px;
+  display:flex;align-items:center;gap:5px;
+}
+.fc-step.answer{border-left-color:var(--green);background:#f0faf4}
+.fc-step.answer .step-label{color:var(--green)}
+.fc-step.explanation{border-left-color:var(--accent);background:#fffbf0}
+.fc-step.explanation .step-label{color:#b07d10}
+.fc-step.examples{border-left-color:var(--secondary);background:#f4f9fc}
+.fc-step.examples .step-label{color:var(--secondary)}
+.fc-step .step-text{font-size:.95rem;line-height:1.6}
+.fc-step .step-text strong{color:var(--primary)}
+
+.fc-step .audio-line{
+  display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;
+}
+
+.fc-progress{
+  display:flex;gap:6px;
+  padding:0 18px 14px;
+  align-items:center;
+}
+.fc-progress .dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#d0d9e6;transition:.25s;
+}
+.fc-progress .dot.done{background:var(--green)}
+.fc-progress .dot.active{background:var(--secondary);box-shadow:0 0 0 3px rgba(26,122,140,.2)}
+.fc-progress .fc-count{
+  margin-left:auto;font-size:.75rem;color:var(--muted);font-weight:700;
+}
+
+.fc-actions{
+  display:flex;gap:8px;padding:0 18px 16px;flex-wrap:wrap;
+}
+.fc-actions button{
+  flex:1;min-width:120px;font-size:.85rem;padding:10px 14px;min-height:42px;
+}
+
+/* Filter bar */
+.filter-bar{
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+  margin:16px 0 8px;
+}
+.filter-bar label{font-weight:700;font-size:.85rem;color:var(--primary)}
+.filter-bar select{
+  width:auto;min-width:150px;padding:10px 14px;font-size:.88rem;
+  border-radius:10px;
+}
+.filter-bar .count{
+  font-size:.82rem;color:var(--muted);margin-left:auto;font-weight:700;
+}
+
+/* Tab bar */
+.tab-bar{
+  display:flex;gap:0;margin:18px 0 0;
+  border-bottom:2px solid #e3e8ef;
+  flex-wrap:wrap;
+}
+.tab-bar button{
+  background:none;color:var(--muted);border:0;border-radius:0;
+  padding:12px 18px;font-weight:700;font-size:.9rem;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  cursor:pointer;width:auto;min-height:auto;
+}
+.tab-bar button.active{color:var(--primary);border-bottom-color:var(--primary)}
+.tab-bar button:hover{color:var(--primary)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* STAR grid */
+.star-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:12px;margin:16px 0;
+}
+.star-box{
+  background:#f8fafc;border-radius:14px;padding:16px;
+  border:1px solid #e3e8ef;
+}
+.star-box strong{color:var(--secondary);display:block;margin-bottom:6px;font-size:.9rem}
+.star-box p{margin:0;font-size:.9rem}
+
+/* Vocab highlight */
+.vocab-word{
+  display:inline-block;background:#e8f2fb;color:var(--primary);
+  padding:2px 8px;border-radius:6px;font-weight:700;font-size:.88rem;
+  margin:2px 2px;cursor:pointer;transition:.15s;
+}
+.vocab-word:hover{background:#d0e2f5}
+
+/* Reset all */
+.reset-all{
+  margin-left:auto;font-size:.82rem;padding:10px 16px;
+  border-radius:12px;background:#eaf0f6;color:var(--primary);
+  width:auto;min-height:42px;
+}
+
+/* Responsive */
+@media(max-width:600px){
+  body{font-size:16px}
+  header{padding-top:24px}
+  .card{padding:18px;margin:16px 0}
+  nav a{padding:12px 14px;font-size:.84rem}
+  button{width:100%;margin-top:6px}
+  .audio-btn{width:auto;margin-top:0}
+  .filter-bar select{width:100%}
+  .filter-bar .count{margin-left:0;width:100%}
+  .fc-header{padding:16px 16px 10px}
+  .fc-header .fc-question{font-size:1rem}
+  .fc-body{padding:0 16px}
+  .fc-card.open .fc-body{padding:0 16px 16px}
+  .fc-progress{padding:0 16px 12px}
+  .fc-actions{padding:0 16px 14px}
+  .tab-bar button{padding:10px 12px;font-size:.82rem}
+}
+@media(min-width:601px) and (max-width:900px){
+  .fc-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">Tech Interview Coach • Edson D'Aguiar</div>
+    <h1>💻 Interview Flashcards — Information Systems</h1>
+    <p>Answer → Explanation → Examples · A2–C1 · Daily Scrum · Mock Interview · Behavioral · Architecture</p>
+    <div class="progress-wrap" aria-label="Progresso"><div class="progress" id="globalProgress"></div></div>
+    <p class="small" style="color:white;margin-top:8px"><span id="progressLabel">0</span>% concluído • Tech Career English • 2026–2027</p>
+  </div>
+</header>
+
+<nav aria-label="Navegação">
+  <div class="nav-inner">
+    <a href="#objetivos" data-section="objetivos">Objetivos</a>
+    <a href="#flashcards" data-section="flashcards">Flashcards</a>
+    <a href="#vocabulary" data-section="vocabulary">Vocabulary</a>
+    <a href="#star" data-section="star">STAR Method</a>
+    <a href="#practice" data-section="practice">Practice</a>
+    <a href="#quiz" data-section="quiz">Quiz</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ========== OBJETIVOS ========== -->
+<section class="card" id="objetivos">
+  <span class="badge">A2–C1 • INFORMATION SYSTEMS</span>
+  <h2>🎯 Objetivos do simulador</h2>
+  <p>Este conjunto de flashcards foi criado para profissionais de <strong>Sistemas de Informação</strong> que precisam se comunicar em inglês em <strong>entrevistas técnicas e comportamentais</strong>. Ao terminar, você deverá ser capaz de:</p>
+  <ul class="goal-list">
+    <li>Responder perguntas de <strong>entrevistas técnicas (Mock Interviews)</strong> com clareza e estrutura.</li>
+    <li>Descrever sua <strong>arquitetura de código e infraestrutura</strong> em um Daily Scrum.</li>
+    <li>Usar o método <strong>STAR</strong> (Situação, Tarefa, Ação, Resultado) para perguntas comportamentais.</li>
+    <li>Dominar <strong>vocabulário técnico</strong> essencial para 2026–2027: microservices, CI/CD, observability, IA generativa, Zero Trust.</li>
+    <li>Praticar respostas com <strong>áudio US/UK</strong> para melhorar pronúncia e fluência.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>💡 Proposta de valor:</strong> Em vez de gramática pura, este simulador foca na <strong>sua dor real</strong>: descrever código em reuniões, passar em entrevistas técnicas e se comunicar com confiança em equipes globais.
+  </div>
+</section>
+
+<!-- ========== FLASHCARDS ========== -->
+<section class="card" id="flashcards">
+  <h2>🃏 Flashcards — Interview Questions</h2>
+  <p>Clique em um cartão para revelar a <strong>Answer</strong>, depois a <strong>Explanation</strong> e os <strong>Examples</strong>. Use os botões de áudio para ouvir a pronúncia. O progresso é salvo automaticamente no seu navegador.</p>
+
+  <div class="tab-bar" id="tabBar">
+    <button class="active" data-tab="all" onclick="switchTab('all')">📋 Todos</button>
+    <button data-tab="technical" onclick="switchTab('technical')">⚙️ Technical</button>
+    <button data-tab="behavioral" onclick="switchTab('behavioral')">🧠 Behavioral</button>
+    <button data-tab="scrum" onclick="switchTab('scrum')">🗓️ Daily Scrum</button>
+    <button data-tab="architecture" onclick="switchTab('architecture')">🏗️ Architecture</button>
+  </div>
+
+  <div class="filter-bar">
+    <label for="levelFilter">Nível:</label>
+    <select id="levelFilter" onchange="renderFlashcards()">
+      <option value="all">Todos</option>
+      <option value="A2">A2</option>
+      <option value="B1">B1</option>
+      <option value="B2">B2</option>
+      <option value="C1">C1</option>
+    </select>
+    <span class="count" id="fcCount"></span>
+    <button class="reset-all" onclick="resetAllCards()">🔄 Reset all</button>
+  </div>
+
+  <div class="tip" style="margin-top:12px">
+    <strong>💡 Dica:</strong> Para entrevistas técnicas, sempre estruture sua resposta: <strong>Contexto → Ação → Resultado</strong>. Seja específico com tecnologias e métricas (ex: "reduced latency by 40%").
+  </div>
+
+  <div class="fc-grid" id="flashcardGrid"></div>
+</section>
+
+<!-- ========== VOCABULARY ========== -->
+<section class="card" id="vocabulary">
+  <h2>📚 Vocabulary — Essential Tech Terms</h2>
+  <p>Domine o vocabulário técnico essencial para entrevistas em Sistemas de Informação. Clique nas palavras para ouvir a pronúncia.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Termo</th><th>Significado</th><th>Exemplo de Uso</th><th>Áudio</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Microservices</strong></td>
+          <td>Arquitetura de serviços independentes</td>
+          <td>Our system uses microservices to scale independently.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="Our system uses microservices to scale independently." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="Our system uses microservices to scale independently." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>API Gateway</strong></td>
+          <td>Ponto único de entrada para APIs</td>
+          <td>We use an API Gateway to handle authentication and routing.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="We use an API Gateway to handle authentication and routing." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="We use an API Gateway to handle authentication and routing." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>CI/CD Pipeline</strong></td>
+          <td>Integração e entrega contínua</td>
+          <td>Our CI/CD pipeline runs tests and deploys to staging automatically.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="Our CI/CD pipeline runs tests and deploys to staging automatically." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="Our CI/CD pipeline runs tests and deploys to staging automatically." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Observability</strong></td>
+          <td>Monitoramento e visibilidade do sistema</td>
+          <td>We use Prometheus and Grafana for observability.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="We use Prometheus and Grafana for observability." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="We use Prometheus and Grafana for observability." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Kubernetes</strong></td>
+          <td>Orquestração de containers</td>
+          <td>Our services run on Kubernetes clusters.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="Our services run on Kubernetes clusters." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="Our services run on Kubernetes clusters." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Scalability</strong></td>
+          <td>Capacidade de crescer</td>
+          <td>We designed the system for horizontal scalability.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="We designed the system for horizontal scalability." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="We designed the system for horizontal scalability." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Latency</strong></td>
+          <td>Tempo de resposta</td>
+          <td>We reduced latency by 40% using caching.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="We reduced latency by 40% using caching." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="We reduced latency by 40% using caching." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Tech Debt</strong></td>
+          <td>Dívida técnica</td>
+          <td>We allocate 20% of each sprint to pay down tech debt.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="We allocate 20% of each sprint to pay down tech debt." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="We allocate 20% of each sprint to pay down tech debt." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Generative AI</strong></td>
+          <td>IA generativa (2026–2027)</td>
+          <td>We use generative AI to automate code reviews and documentation.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="We use generative AI to automate code reviews and documentation." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="We use generative AI to automate code reviews and documentation." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Zero Trust Security</strong></td>
+          <td>Segurança baseada em confiança zero</td>
+          <td>We adopted a Zero Trust security model for all internal services.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="We adopted a Zero Trust security model for all internal services." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="We adopted a Zero Trust security model for all internal services." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Serverless</strong></td>
+          <td>Computação sem servidor</td>
+          <td>We migrated some workloads to serverless functions to reduce costs.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="We migrated some workloads to serverless functions to reduce costs." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="We migrated some workloads to serverless functions to reduce costs." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Edge Computing</strong></td>
+          <td>Computação na borda (2026–2027)</td>
+          <td>We use edge computing to process data closer to users.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="We use edge computing to process data closer to users." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="We use edge computing to process data closer to users." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip">
+    <strong>💡 Dica:</strong> Use <strong>verbos de ação no passado</strong> (refactored, deployed, fixed, implemented, reviewed) e <strong>conectores</strong> (because, so, in order to, also). Isso mostra fluência e clareza técnica.
+  </div>
+</section>
+
+<!-- ========== STAR METHOD ========== -->
+<section class="card" id="star">
+  <h2>🧠 STAR Method — Behavioral Questions</h2>
+  <p>As perguntas comportamentais avaliam como você lida com situações reais de trabalho. A melhor forma de responder é usar o método <strong>STAR</strong>:</p>
+
+  <div class="star-grid">
+    <div class="star-box"><strong>S — Situation</strong><p>Descreva o contexto: onde, quando, qual era o desafio?</p></div>
+    <div class="star-box"><strong>T — Task</strong><p>Qual era a sua responsabilidade ou objetivo?</p></div>
+    <div class="star-box"><strong>A — Action</strong><p>O que você fez especificamente? Quais passos tomou?</p></div>
+    <div class="star-box"><strong>R — Result</strong><p>Qual foi o resultado? Use métricas sempre que possível.</p></div>
+  </div>
+
+  <h3>Perguntas difíceis e respostas modelo (STAR)</h3>
+
+  <div class="exercise">
+    <h3>❓ "Tell me about a time you failed. How did you handle it?"</h3>
+    <div class="example">
+      <div class="en"><strong>S:</strong> In my previous job, we were migrating a legacy system to the cloud. <strong>T:</strong> I was responsible for the database migration. <strong>A:</strong> I underestimated the data volume and the migration took 3 hours longer than planned, causing downtime. I immediately communicated the issue to stakeholders and implemented a rollback plan. <strong>R:</strong> We recovered in 30 minutes, and I created a detailed checklist for future migrations to prevent recurrence.</div>
+      <div class="pt">Na minha empresa anterior, estávamos migrando um sistema legado para a nuvem. Eu era responsável pela migração do banco de dados. Subestimei o volume de dados e a migração levou 3 horas a mais que o planejado, causando downtime. Imediatamente comuniquei o problema às partes interessadas e implementei um plano de rollback. Recuperamos em 30 minutos, e criei um checklist detalhado para futuras migrações para evitar recorrência.</div>
+      <div class="example-audio">
+        <button class="audio-btn" data-phrase="In my previous job, we were migrating a legacy system to the cloud. I was responsible for the database migration. I underestimated the data volume and the migration took 3 hours longer than planned, causing downtime. I immediately communicated the issue to stakeholders and implemented a rollback plan. We recovered in 30 minutes, and I created a detailed checklist for future migrations to prevent recurrence." data-accent="us">🇺🇸 US</button>
+        <button class="audio-btn" data-phrase="In my previous job, we were migrating a legacy system to the cloud. I was responsible for the database migration. I underestimated the data volume and the migration took 3 hours longer than planned, causing downtime. I immediately communicated the issue to stakeholders and implemented a rollback plan. We recovered in 30 minutes, and I created a detailed checklist for future migrations to prevent recurrence." data-accent="uk">🇬🇧 UK</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>❓ "How do you handle conflict within a team?"</h3>
+    <div class="example">
+      <div class="en"><strong>S:</strong> Two developers on my team disagreed on the API design. <strong>T:</strong> I needed to facilitate a decision without delaying the sprint. <strong>A:</strong> I organized a short meeting, asked both to present their pros and cons, and we agreed on a hybrid approach. I documented the decision and shared it with the team. <strong>R:</strong> We delivered the API on time, and the solution was adopted in other teams.</div>
+      <div class="pt">Dois desenvolvedores da minha equipe discordaram sobre o design da API. Eu precisava facilitar uma decisão sem atrasar a sprint. Organizei uma reunião curta, pedi que ambos apresentassem prós e contras, e concordamos com uma abordagem híbrida. Documentei a decisão e compartilhei com a equipe. Entregamos a API no prazo, e a solução foi adotada em outras equipes.</div>
+      <div class="example-audio">
+        <button class="audio-btn" data-phrase="Two developers on my team disagreed on the API design. I needed to facilitate a decision without delaying the sprint. I organized a short meeting, asked both to present their pros and cons, and we agreed on a hybrid approach. I documented the decision and shared it with the team. We delivered the API on time, and the solution was adopted in other teams." data-accent="us">🇺🇸 US</button>
+        <button class="audio-btn" data-phrase="Two developers on my team disagreed on the API design. I needed to facilitate a decision without delaying the sprint. I organized a short meeting, asked both to present their pros and cons, and we agreed on a hybrid approach. I documented the decision and shared it with the team. We delivered the API on time, and the solution was adopted in other teams." data-accent="uk">🇬🇧 UK</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>❓ "How do you prioritize tasks when everything is urgent?"</h3>
+    <div class="example">
+      <div class="en"><strong>S:</strong> During a release week, I had multiple critical tasks: a production bug, a feature deadline, and a code review backlog. <strong>T:</strong> I needed to manage all three without burning out. <strong>A:</strong> I used the Eisenhower Matrix — urgent and important first. I fixed the production bug immediately, delegated code reviews, and negotiated a 2-day extension for the feature. <strong>R:</strong> We released with zero critical bugs, and the team's stress level decreased.</div>
+      <div class="pt">Durante uma semana de release, eu tinha várias tarefas críticas: um bug em produção, um prazo de feature e um backlog de code review. Eu precisava gerenciar os três sem burnout. Usei a Matriz de Eisenhower — urgente e importante primeiro. Corrigi o bug em produção imediatamente, deleguei code reviews e negociei uma extensão de 2 dias para a feature. Lançamos com zero bugs críticos, e o nível de estresse da equipe diminuiu.</div>
+      <div class="example-audio">
+        <button class="audio-btn" data-phrase="During a release week, I had multiple critical tasks: a production bug, a feature deadline, and a code review backlog. I needed to manage all three without burning out. I used the Eisenhower Matrix — urgent and important first. I fixed the production bug immediately, delegated code reviews, and negotiated a 2-day extension for the feature. We released with zero critical bugs, and the team's stress level decreased." data-accent="us">🇺🇸 US</button>
+        <button class="audio-btn" data-phrase="During a release week, I had multiple critical tasks: a production bug, a feature deadline, and a code review backlog. I needed to manage all three without burning out. I used the Eisenhower Matrix — urgent and important first. I fixed the production bug immediately, delegated code reviews, and negotiated a 2-day extension for the feature. We released with zero critical bugs, and the team's stress level decreased." data-accent="uk">🇬🇧 UK</button>
+      </div>
+    </div>
+  </div>
+
+  <h3>✏️ Your Turn — Responda usando STAR</h3>
+  <p>Escolha uma pergunta e escreva sua resposta usando a estrutura STAR. Depois, pratique falando em voz alta.</p>
+  <select id="behavioralSelect">
+    <option value="fail">Tell me about a time you failed.</option>
+    <option value="conflict">How do you handle conflict within a team?</option>
+    <option value="pressure">Describe a stressful situation you handled well.</option>
+    <option value="leadership">Tell me about a time you led a project.</option>
+    <option value="feedback">Tell me about a time you received difficult feedback.</option>
+  </select>
+  <textarea id="behavioralNotes" placeholder="Use STAR: Situation → Task → Action → Result" style="margin-top:10px"></textarea>
+  <button class="secondary" onclick="saveBehavioral()" style="margin-top:10px">💾 Save My STAR Answer</button>
+  <div id="behavioralFb" class="feedback"></div>
+</section>
+
+<!-- ========== PRACTICE ========== -->
+<section class="card" id="practice">
+  <h2>🗣️ Practice — Fale como um profissional de TI</h2>
+  <p>Escolha um tópico e pratique sua resposta em voz alta. Use a estrutura <strong>S+V+O</strong> e adicione detalhes técnicos.</p>
+
+  <div class="exercise">
+    <h3>🎯 Escolha um tópico</h3>
+    <select id="practiceTopic">
+      <option value="daily">Daily Scrum — What did you do yesterday?</option>
+      <option value="arch">Architecture — Describe your microservices</option>
+      <option value="cicd">DevOps — Describe your CI/CD pipeline</option>
+      <option value="bug">Debugging — Tell me about a complex bug</option>
+      <option value="ai">AI — How do you use AI in your workflow?</option>
+      <option value="remote">Remote Work — How do you collaborate globally?</option>
+    </select>
+    <button class="secondary" onclick="showPractice()" style="margin-top:10px">🔍 Show Question & Model</button>
+
+    <div id="practiceOutput" class="exercise" style="display:none;background:#f8fafc;">
+      <h4 id="practiceQuestion" style="color:var(--primary);margin-top:0"></h4>
+      <div id="practiceModel"></div>
+      <div id="practiceAudio" class="example-audio" style="margin-top:8px"></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px">🎤 Your Turn — Fale por 30–45 segundos</h3>
+  <ol>
+    <li>Describe your daily routine as a developer.</li>
+    <li>Explain your project architecture to a non-technical stakeholder.</li>
+    <li>Tell me about a time you solved a critical production bug.</li>
+    <li>How do you stay updated with new technologies in 2026–2027?</li>
+  </ol>
+
+  <textarea id="speakingNotes" placeholder="Escreva suas respostas aqui antes de falar..."></textarea>
+  <button onclick="saveSpeaking()">💾 Save My Practice</button>
+  <div id="speakFb" class="feedback"></div>
+</section>
+
+<!-- ========== QUIZ ========== -->
+<section class="card" id="quiz">
+  <h2>🎮 Interactive Quiz</h2>
+  <p>10 questões sobre Tech Interview English. Escolha a melhor resposta. O feedback aparece imediatamente. <em>As questões são embaralhadas.</em></p>
+
+  <div id="quizContainer"></div>
+
+  <div class="score">
+    <div>YOUR SCORE</div>
+    <strong id="score">0 / 10</strong>
+    <p id="scoreMessage">Complete o quiz para ver seu resultado.</p>
+    <button class="light" onclick="restartQuiz()">🔄 Restart Quiz</button>
+  </div>
+</section>
+
+<!-- ========== CHALLENGE ========== -->
+<section class="card">
+  <h2>🏁 Challenge — Sua vez!</h2>
+  <p>Sem consultar o conteúdo, responda em inglês:</p>
+  <div class="example">
+    <strong>1. Daily Scrum:</strong> "Yesterday I refactored the authentication service. Today I'm going to implement caching. I'm blocked on database access."<br><br>
+    <strong>2. Mock Interview:</strong> "Our architecture is a microservices-based system on Kubernetes. We use an API Gateway and Prometheus for observability."<br><br>
+    <strong>3. Behavioral (STAR):</strong> "During a release week, I prioritized a production bug using the Eisenhower Matrix. I fixed it in 30 minutes and we released on time."
+  </div>
+  <p class="small">Objetivo: produzir respostas claras, técnicas e confiantes para contextos reais de TI.</p>
+</section>
+
+</main>
+
+<footer>
+  Tech Interview Coach • Preparação para Entrevistas Internacionais • Cambridge • IELTS • TOEFL<br>
+  <span class="copyright">© English VClass • Edson D'Aguiar</span>
+  • WhatsApp ➡️ <a href="https://wa.me/5541991725009" target="_blank" rel="noopener">Contato</a>
+</footer>
+
+<script>
+/* ================================================================
+   AUDIO — global click handler
+   ================================================================ */
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('.audio-btn');
+  if (!btn) return;
+  e.stopPropagation();
+  const phrase = btn.dataset.phrase;
+  const accent = btn.dataset.accent || 'us';
+  if (!phrase) return;
+
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(phrase);
+  utterance.lang = accent === 'uk' ? 'en-GB' : 'en-US';
+  utterance.rate = 0.85;
+  utterance.pitch = 1.0;
+
+  const voices = window.speechSynthesis.getVoices();
+  if (voices.length > 0) {
+    const found = voices.find(v => v.lang.startsWith(accent === 'uk' ? 'en-GB' : 'en-US'));
+    if (found) utterance.voice = found;
+  }
+
+  btn.classList.add('playing');
+  utterance.onend = () => btn.classList.remove('playing');
+  utterance.onerror = () => btn.classList.remove('playing');
+  window.speechSynthesis.speak(utterance);
+});
+
+/* ================================================================
+   FEEDBACK HELPER
+   ================================================================ */
+function setFeedback(id, correct, text){
+  const el=document.getElementById(id);
+  el.className='feedback '+(correct?'correct':'wrong');
+  el.textContent=(correct?'🟢 ':'🔴 ')+text;
+}
+
+/* ================================================================
+   PROGRESS TRACKING
+   ================================================================ */
+const SECTIONS = ['objetivos','flashcards','vocabulary','star','practice','quiz'];
+const sectionState = {};
+SECTIONS.forEach(s => sectionState[s] = false);
+
+function markSectionDone(id){
+  if (sectionState[id]) return;
+  sectionState[id] = true;
+  const link = document.querySelector('nav a[data-section="'+id+'"]');
+  if (link) link.classList.add('done');
+  updateProgress();
+}
+
+function updateProgress(){
+  const done = SECTIONS.filter(s => sectionState[s]).length;
+  const pct = Math.round((done / SECTIONS.length) * 100);
+  document.getElementById('globalProgress').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = pct;
+}
+
+document.querySelectorAll('#star .exercise button').forEach(btn => {
+  btn.addEventListener('click', () => markSectionDone('star'));
+});
+document.querySelectorAll('#practice button').forEach(btn => {
+  btn.addEventListener('click', () => markSectionDone('practice'));
+});
+
+/* ================================================================
+   FLASHCARD DATA
+   Each card: { id, category, level, icon, topic, question, answer, explanation, examples[], audio }
+   ================================================================ */
+const FLASHCARDS = [
+  /* ---------- TECHNICAL ---------- */
+  {
+    id:'t-self', category:'technical', level:'A2', icon:'👋', topic:'Self Introduction',
+    question: 'Tell me about yourself.',
+    answer: "I'm a backend developer with five years of experience building scalable systems. I specialize in Node.js and Python, and I'm passionate about clean architecture and automated testing. Currently, I'm working on a microservices migration project using Kubernetes and AWS.",
+    explanation: 'This question assesses your ability to summarize your professional background clearly and concisely. Focus on experience, specialization, and current work.',
+    examples: [
+      "I'm a software engineer with three years of experience in full-stack development.",
+      "I specialize in cloud-native applications and have worked with AWS and Azure.",
+      "Currently, I'm leading a team of four developers on a payment platform."
+    ],
+    audio: "I'm a backend developer with five years of experience building scalable systems. I specialize in Node.js and Python, and I'm passionate about clean architecture and automated testing. Currently, I'm working on a microservices migration project using Kubernetes and AWS."
+  },
+  {
+    id:'t-experience', category:'technical', level:'B1', icon:'💼', topic:'Experience',
+    question: 'Walk me through your background.',
+    answer: "I started as a junior developer working on a monolithic PHP application. Over time, I transitioned to a microservices architecture with Node.js and Docker. In my last role, I led a team of four developers and we reduced deployment time by 60% by implementing a CI/CD pipeline with GitHub Actions.",
+    explanation: 'This tests your ability to tell a coherent career story, highlighting growth and concrete achievements.',
+    examples: [
+      "I began my career in a startup where I wore many hats, from frontend to DevOps.",
+      "At my last company, I migrated a legacy system to the cloud, reducing costs by 30%.",
+      "I've worked in both agency and product environments, which gave me a broad perspective."
+    ],
+    audio: "I started as a junior developer working on a monolithic PHP application. Over time, I transitioned to a microservices architecture with Node.js and Docker. In my last role, I led a team of four developers and we reduced deployment time by 60% by implementing a CI/CD pipeline with GitHub Actions."
+  },
+  {
+    id:'t-stack', category:'technical', level:'B1', icon:'⚙️', topic:'Tech Stack',
+    question: 'What technologies do you use in your daily work?',
+    answer: "My core stack is TypeScript, Node.js, and PostgreSQL. For frontend, I work with React and Next.js. For infrastructure, I use Docker, Kubernetes, and Terraform on AWS. I also use Grafana and Prometheus for observability, and GitHub Actions for CI/CD.",
+    explanation: 'This assesses your technical depth and breadth. Mention specific tools and how they fit into your workflow.',
+    examples: [
+      "My main languages are Python and Java, with Spring Boot for backend services.",
+      "I use React and Redux for frontend, and Node.js with Express for APIs.",
+      "For databases, I work with PostgreSQL and Redis; for messaging, RabbitMQ and Kafka."
+    ],
+    audio: "My core stack is TypeScript, Node.js, and PostgreSQL. For frontend, I work with React and Next.js. For infrastructure, I use Docker, Kubernetes, and Terraform on AWS. I also use Grafana and Prometheus for observability, and GitHub Actions for CI/CD."
+  },
+  {
+    id:'t-arch', category:'technical', level:'B2', icon:'🏗️', topic:'Architecture',
+    question: 'Describe your project architecture.',
+    answer: "Our architecture is event-driven microservices running on Kubernetes. Services communicate through a message broker (RabbitMQ). We have an API Gateway that handles rate limiting and authentication. Data is stored in PostgreSQL for transactional data and Redis for caching. For observability, we use the ELK stack and Prometheus.",
+    explanation: 'This tests your ability to explain complex systems clearly. Use standard architecture terminology and highlight design decisions.',
+    examples: [
+      "We follow a hexagonal architecture to separate business logic from infrastructure.",
+      "Our system uses CQRS and event sourcing for high-throughput scenarios.",
+      "We have a multi-region deployment for disaster recovery and low latency."
+    ],
+    audio: "Our architecture is event-driven microservices running on Kubernetes. Services communicate through a message broker, RabbitMQ. We have an API Gateway that handles rate limiting and authentication. Data is stored in PostgreSQL for transactional data and Redis for caching. For observability, we use the ELK stack and Prometheus."
+  },
+  {
+    id:'t-bug', category:'technical', level:'B2', icon:'🔧', topic:'Problem Solving',
+    question: 'Tell me about a complex bug you solved.',
+    answer: "We had a memory leak in a Node.js service that was causing crashes every 48 hours. I used heap dumps and profiling tools to identify that a caching library was holding references to unused objects. I refactored the cache implementation and added a TTL policy. The crashes stopped completely.",
+    explanation: 'Use the STAR method: describe the situation, your task, the actions you took, and the result. Be specific about tools and metrics.',
+    examples: [
+      "I diagnosed a race condition in a distributed system using distributed tracing.",
+      "I fixed a database deadlock by optimizing transaction isolation levels.",
+      "I reduced API response time from 2s to 200ms by adding indexing and caching."
+    ],
+    audio: "We had a memory leak in a Node.js service that was causing crashes every 48 hours. I used heap dumps and profiling tools to identify that a caching library was holding references to unused objects. I refactored the cache implementation and added a TTL policy. The crashes stopped completely."
+  },
+  {
+    id:'t-cicd', category:'technical', level:'B2', icon:'☁️', topic:'CI/CD Pipeline',
+    question: 'Describe your CI/CD pipeline.',
+    answer: "We use GitHub Actions for CI. On every pull request, we run linting, unit tests, and integration tests. Once merged to main, the pipeline builds a Docker image, pushes it to Amazon ECR, and deploys to a staging environment via ArgoCD. After QA approval, we promote to production with a blue-green deployment strategy.",
+    explanation: 'This assesses your DevOps knowledge. Mention tools, stages, and deployment strategies.',
+    examples: [
+      "We use GitLab CI with stages for build, test, security scan, and deploy.",
+      "Our pipeline includes automated rollback if health checks fail.",
+      "We use feature flags to decouple deployment from release."
+    ],
+    audio: "We use GitHub Actions for CI. On every pull request, we run linting, unit tests, and integration tests. Once merged to main, the pipeline builds a Docker image, pushes it to Amazon ECR, and deploys to a staging environment via ArgoCD. After QA approval, we promote to production with a blue-green deployment strategy."
+  },
+  {
+    id:'t-ai', category:'technical', level:'C1', icon:'🤖', topic:'AI & 2026–2027',
+    question: 'How do you use AI in your workflow in 2026–2027?',
+    answer: "I use generative AI to accelerate code reviews and documentation. For example, I use Copilot for boilerplate code and unit test generation. We also use AI-powered observability tools that predict anomalies before they impact users. However, I always review AI-generated code carefully for security and correctness.",
+    explanation: 'This tests your awareness of modern trends and your ability to balance innovation with responsibility.',
+    examples: [
+      "We use LLMs to generate test cases and summarize pull requests.",
+      "AI helps us triage alerts by correlating logs and metrics.",
+      "We have strict guidelines for reviewing AI-generated code for security vulnerabilities."
+    ],
+    audio: "I use generative AI to accelerate code reviews and documentation. For example, I use Copilot for boilerplate code and unit test generation. We also use AI-powered observability tools that predict anomalies before they impact users. However, I always review AI-generated code carefully for security and correctness."
+  },
+  {
+    id:'t-security', category:'technical', level:'C1', icon:'🔒', topic:'Security',
+    question: 'How do you ensure application security?',
+    answer: "We follow a Zero Trust security model. All services require mutual TLS for communication. We use OWASP guidelines for secure coding and run SAST/DAST tools in our CI pipeline. Secrets are managed with AWS Secrets Manager. We also conduct regular penetration tests and security training for the team.",
+    explanation: 'This assesses your understanding of security best practices, crucial for modern systems.',
+    examples: [
+      "We implement least-privilege access for all services and databases.",
+      "We use dependency scanning to detect vulnerable libraries early.",
+      "Incident response drills help us prepare for real security events."
+    ],
+    audio: "We follow a Zero Trust security model. All services require mutual TLS for communication. We use OWASP guidelines for secure coding and run SAST/DAST tools in our CI pipeline. Secrets are managed with AWS Secrets Manager. We also conduct regular penetration tests and security training for the team."
+  },
+
+  /* ---------- BEHAVIORAL ---------- */
+  {
+    id:'b-fail', category:'behavioral', level:'B1', icon:'📉', topic:'Failure',
+    question: 'Tell me about a time you failed. How did you handle it?',
+    answer: "In my previous job, we were migrating a legacy system to the cloud. I was responsible for the database migration. I underestimated the data volume and the migration took 3 hours longer than planned, causing downtime. I immediately communicated the issue to stakeholders and implemented a rollback plan. We recovered in 30 minutes, and I created a detailed checklist for future migrations to prevent recurrence.",
+    explanation: 'This question assesses your honesty, accountability, and ability to learn from mistakes. Use STAR and focus on the lesson learned.',
+    examples: [
+      "I missed a deadline because I didn't communicate blockers early. Now I send daily updates.",
+      "I deployed a bug to production that affected 10% of users. I introduced automated smoke tests.",
+      "I underestimated a task's complexity and now always break down work into smaller chunks."
+    ],
+    audio: "In my previous job, we were migrating a legacy system to the cloud. I was responsible for the database migration. I underestimated the data volume and the migration took 3 hours longer than planned, causing downtime. I immediately communicated the issue to stakeholders and implemented a rollback plan. We recovered in 30 minutes, and I created a detailed checklist for future migrations to prevent recurrence."
+  },
+  {
+    id:'b-conflict', category:'behavioral', level:'B1', icon:'🤝', topic:'Team Conflict',
+    question: 'How do you handle conflict within a team?',
+    answer: "Two developers on my team disagreed on the API design. I needed to facilitate a decision without delaying the sprint. I organized a short meeting, asked both to present their pros and cons, and we agreed on a hybrid approach. I documented the decision and shared it with the team. We delivered the API on time, and the solution was adopted in other teams.",
+    explanation: 'This assesses your interpersonal skills, emotional intelligence, and ability to mediate. Show that you focus on the problem, not the person.',
+    examples: [
+      "I encourage open discussion and ensure everyone feels heard.",
+      "I use data and user impact to guide technical decisions, not opinions.",
+      "I document decisions to create transparency and avoid future conflicts."
+    ],
+    audio: "Two developers on my team disagreed on the API design. I needed to facilitate a decision without delaying the sprint. I organized a short meeting, asked both to present their pros and cons, and we agreed on a hybrid approach. I documented the decision and shared it with the team. We delivered the API on time, and the solution was adopted in other teams."
+  },
+  {
+    id:'b-pressure', category:'behavioral', level:'B1', icon:'🔥', topic:'Pressure',
+    question: 'How do you deal with stress at work?',
+    answer: "I stay calm and prioritise tasks. I also take short breaks to refocus. This helps me stay productive under pressure. During a recent release, I used the Eisenhower Matrix to prioritize critical bugs and communicated clearly with stakeholders.",
+    explanation: 'This tests your emotional intelligence and coping strategies. Mention concrete techniques and examples.',
+    examples: [
+      "I break large tasks into smaller, manageable steps.",
+      "I communicate early when I feel overwhelmed, so the team can help.",
+      "I use the Pomodoro technique to maintain focus during intense periods."
+    ],
+    audio: "I stay calm and prioritise tasks. I also take short breaks to refocus. This helps me stay productive under pressure. During a recent release, I used the Eisenhower Matrix to prioritize critical bugs and communicated clearly with stakeholders."
+  },
+  {
+    id:'b-prioritize', category:'behavioral', level:'B2', icon:'📋', topic:'Prioritization',
+    question: 'How do you prioritize tasks when everything is urgent?',
+    answer: "During a release week, I had multiple critical tasks: a production bug, a feature deadline, and a code review backlog. I needed to manage all three without burning out. I used the Eisenhower Matrix — urgent and important first. I fixed the production bug immediately, delegated code reviews, and negotiated a 2-day extension for the feature. We released with zero critical bugs, and the team's stress level decreased.",
+    explanation: 'This assesses your time management and decision-making skills. Show that you can distinguish urgent from important.',
+    examples: [
+      "I use the Eisenhower Matrix to categorize tasks by urgency and importance.",
+      "I delegate tasks when appropriate and negotiate deadlines when necessary.",
+      "I communicate proactively with stakeholders to manage expectations."
+    ],
+    audio: "During a release week, I had multiple critical tasks: a production bug, a feature deadline, and a code review backlog. I needed to manage all three without burning out. I used the Eisenhower Matrix — urgent and important first. I fixed the production bug immediately, delegated code reviews, and negotiated a 2-day extension for the feature. We released with zero critical bugs, and the team's stress level decreased."
+  },
+  {
+    id:'b-feedback', category:'behavioral', level:'B1', icon:'📝', topic:'Feedback',
+    question: 'How do you react to feedback?',
+    answer: "I see feedback as an opportunity to grow. I listen carefully and ask how I can improve. For example, my manager once told me I needed to communicate more proactively. I started sending weekly status updates, and it improved team alignment.",
+    explanation: 'This assesses your openness to feedback and willingness to learn. Show self-awareness and action.',
+    examples: [
+      "I ask clarifying questions to fully understand the feedback.",
+      "I create an action plan to address the feedback and follow up.",
+      "I actively seek feedback from peers and mentors."
+    ],
+    audio: "I see feedback as an opportunity to grow. I listen carefully and ask how I can improve. For example, my manager once told me I needed to communicate more proactively. I started sending weekly status updates, and it improved team alignment."
+  },
+  {
+    id:'b-leadership', category:'behavioral', level:'B2', icon:'👑', topic:'Leadership',
+    question: 'Tell me about a time you led a project.',
+    answer: "I coordinated a small team for a sales event. We increased sales by 10%. I set clear goals, delegated tasks based on strengths, and organized daily check-ins. I also ensured we had a contingency plan. The project was delivered on time and under budget.",
+    explanation: 'This assesses your leadership potential. Use STAR and highlight results and team dynamics.',
+    examples: [
+      "I led a team of five developers to migrate a critical service with zero downtime.",
+      "I mentored two junior developers and helped them deliver their first production feature.",
+      "I organized a hackathon that resulted in a new feature adopted by the company."
+    ],
+    audio: "I coordinated a small team for a sales event. We increased sales by 10%. I set clear goals, delegated tasks based on strengths, and organized daily check-ins. I also ensured we had a contingency plan. The project was delivered on time and under budget."
+  },
+
+  /* ---------- DAILY SCRUM ---------- */
+  {
+    id:'s-yesterday', category:'scrum', level:'A2', icon:'📅', topic:'What did you do yesterday?',
+    question: 'What did you do yesterday?',
+    answer: "Yesterday, I refactored the authentication service and deployed it to staging. I also fixed a critical bug in the payment gateway. Additionally, I reviewed two pull requests from the frontend team.",
+    explanation: 'Use the past simple with action verbs (refactored, deployed, fixed, reviewed). Be specific about the technical details.',
+    examples: [
+      "Yesterday, I implemented the new login flow and wrote unit tests.",
+      "I had a meeting with the product team to discuss requirements.",
+      "I resolved a production incident and documented the root cause."
+    ],
+    audio: "Yesterday, I refactored the authentication service and deployed it to staging. I also fixed a critical bug in the payment gateway. Additionally, I reviewed two pull requests from the frontend team."
+  },
+  {
+    id:'s-today', category:'scrum', level:'A2', icon:'🎯', topic:'What will you do today?',
+    question: 'What will you do today?',
+    answer: "Today, I'm going to implement the caching layer for the product API to reduce latency. I will also review the pull request from the frontend team. After that, I'll start writing integration tests for the new endpoint.",
+    explanation: 'Use "I\'m going to" for planned tasks and "I will" for more spontaneous or future actions. Include the purpose (to reduce latency).',
+    examples: [
+      "Today, I will finish the database migration script and test it.",
+      "I'm going to pair with a colleague to debug the notification service.",
+      "I will prepare the presentation for tomorrow's sprint review."
+    ],
+    audio: "Today, I'm going to implement the caching layer for the product API to reduce latency. I will also review the pull request from the frontend team. After that, I'll start writing integration tests for the new endpoint."
+  },
+  {
+    id:'s-blocker', category:'scrum', level:'A2', icon:'🚧', topic:'Any blockers?',
+    question: 'Are there any blockers?',
+    answer: "I'm blocked on the database migration because I need access to the production credentials. Could someone from DevOps help me with that? I've already sent a request through the ticket system.",
+    explanation: 'Use "I\'m blocked on" or "I need help with". Be clear about what you need and who can help.',
+    examples: [
+      "I'm blocked on the API integration because the third-party service is down.",
+      "I need help with the deployment pipeline; it's failing on the staging environment.",
+      "No blockers today, but I might need a review later this afternoon."
+    ],
+    audio: "I'm blocked on the database migration because I need access to the production credentials. Could someone from DevOps help me with that? I've already sent a request through the ticket system."
+  },
+  {
+    id:'s-arch', category:'scrum', level:'B1', icon:'🏗️', topic:'Describing Architecture',
+    question: 'Describe your architecture in a Daily Scrum.',
+    answer: "Our current architecture is a microservices-based system running on Kubernetes. We use an API Gateway to route requests, and each service has its own database. For observability, we use Prometheus and Grafana. Yesterday, I was working on scaling the notification service because it was hitting CPU limits during peak hours.",
+    explanation: 'Combine present simple (for architecture facts) with past continuous (for what you were doing). Use technical vocabulary.',
+    examples: [
+      "We have a serverless architecture on AWS Lambda for event-driven processing.",
+      "Our frontend is a React SPA that communicates with a GraphQL API.",
+      "We use a message queue (RabbitMQ) to decouple services and handle async tasks."
+    ],
+    audio: "Our current architecture is a microservices-based system running on Kubernetes. We use an API Gateway to route requests, and each service has its own database. For observability, we use Prometheus and Grafana. Yesterday, I was working on scaling the notification service because it was hitting CPU limits during peak hours."
+  },
+
+  /* ---------- ARCHITECTURE ---------- */
+  {
+    id:'a-micro', category:'architecture', level:'B1', icon:'🔗', topic:'Microservices',
+    question: 'Why did you choose a microservices architecture?',
+    answer: "We chose microservices to allow independent scaling and deployment of services. This also enables teams to work autonomously. However, it introduces complexity in terms of distributed tracing and data consistency, which we manage with tools like Jaeger and Kafka.",
+    explanation: 'This assesses your understanding of architectural trade-offs. Show that you know both benefits and challenges.',
+    examples: [
+      "Microservices allow us to scale the payment service independently during peak sales.",
+      "We use domain-driven design to define service boundaries.",
+      "Challenges include network latency, data consistency, and operational overhead."
+    ],
+    audio: "We chose microservices to allow independent scaling and deployment of services. This also enables teams to work autonomously. However, it introduces complexity in terms of distributed tracing and data consistency, which we manage with tools like Jaeger and Kafka."
+  },
+  {
+    id:'a-k8s', category:'architecture', level:'B2', icon:'☸️', topic:'Kubernetes',
+    question: 'How do you manage your Kubernetes clusters?',
+    answer: "We use managed Kubernetes on AWS (EKS) for high availability. We define infrastructure as code with Terraform. For deployments, we use Helm charts and ArgoCD for GitOps. We also use Prometheus and Grafana for monitoring, and we have autoscaling policies based on CPU and memory usage.",
+    explanation: 'This assesses your cloud-native operations knowledge. Mention tools, practices, and monitoring.',
+    examples: [
+      "We use namespaces to isolate environments (dev, staging, prod).",
+      "We have pod disruption budgets to ensure high availability during upgrades.",
+      "We use Istio for service mesh, traffic management, and mTLS."
+    ],
+    audio: "We use managed Kubernetes on AWS EKS for high availability. We define infrastructure as code with Terraform. For deployments, we use Helm charts and ArgoCD for GitOps. We also use Prometheus and Grafana for monitoring, and we have autoscaling policies based on CPU and memory usage."
+  },
+  {
+    id:'a-db', category:'architecture', level:'B2', icon:'🗄️', topic:'Database Design',
+    question: 'How do you design a scalable database architecture?',
+    answer: "We use a combination of PostgreSQL for transactional data and Redis for caching. We implement read replicas to offload read traffic. For high-volume event data, we use Kafka and a time-series database like InfluxDB. We also shard data when necessary to distribute load.",
+    explanation: 'This assesses your understanding of database scalability patterns. Mention specific technologies and strategies.',
+    examples: [
+      "We use CQRS to separate read and write models for performance.",
+      "We employ database indexing and query optimization to reduce latency.",
+      "For analytics, we use a data warehouse (Redshift) and ETL pipelines."
+    ],
+    audio: "We use a combination of PostgreSQL for transactional data and Redis for caching. We implement read replicas to offload read traffic. For high-volume event data, we use Kafka and a time-series database like InfluxDB. We also shard data when necessary to distribute load."
+  }
+];
+
+/* ================================================================
+   FLASHCARD RENDERING
+   ================================================================ */
+let currentTab = 'all';
+const cardState = {}; // id -> { step: 0..3, open: bool }
+
+FLASHCARDS.forEach(c => { cardState[c.id] = { step: 0, open: false }; });
+
+// Load saved state
+try {
+  const saved = localStorage.getItem('techFlashcardState');
+  if (saved) {
+    const parsed = JSON.parse(saved);
+    Object.keys(parsed).forEach(k => {
+      if (cardState[k]) cardState[k] = parsed[k];
+    });
+  }
+} catch(e) {}
+
+function saveState() {
+  try {
+    localStorage.setItem('techFlashcardState', JSON.stringify(cardState));
+  } catch(e) {}
+}
+
+function getLevelClass(level) {
+  return 'lvl-' + level.toLowerCase();
+}
+
+function renderFlashcards() {
+  const grid = document.getElementById('flashcardGrid');
+  const levelFilter = document.getElementById('levelFilter').value;
+  let filtered = FLASHCARDS;
+
+  if (currentTab !== 'all') {
+    filtered = filtered.filter(c => c.category === currentTab);
+  }
+  if (levelFilter !== 'all') {
+    filtered = filtered.filter(c => c.level === levelFilter);
+  }
+
+  document.getElementById('fcCount').textContent = filtered.length + ' cartões';
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p class="small" style="grid-column:1/-1;text-align:center;padding:30px;">Nenhum cartão encontrado com este filtro.</p>';
+    return;
+  }
+
+  grid.innerHTML = '';
+  filtered.forEach(card => {
+    const state = cardState[card.id];
+    const el = document.createElement('div');
+    el.className = 'fc-card' + (state.step >= 3 ? ' completed' : '') + (state.open ? ' open' : '');
+    el.id = 'fc-' + card.id;
+    el.dataset.cardId = card.id;
+
+    // Progress dots
+    let dotsHtml = '<div class="fc-progress">';
+    for (let i = 0; i < 3; i++) {
+      const dotClass = i < state.step ? 'dot done' : (i === state.step ? 'dot active' : 'dot');
+      dotsHtml += '<div class="' + dotClass + '"></div>';
+    }
+    dotsHtml += '<span class="fc-count">' + state.step + '/3</span>';
+    dotsHtml += '</div>';
+
+    // Steps
+    let answerStep = '';
+    let explanationStep = '';
+    let examplesStep = '';
+
+    if (state.step >= 1) {
+      answerStep = '<div class="fc-step answer">' +
+        '<div class="step-label">✅ Answer</div>' +
+        '<div class="step-text">' + card.answer + '</div>' +
+        '<div class="audio-line">' +
+          '<button class="audio-btn" data-phrase="' + card.audio.replace(/"/g, '&quot;') + '" data-accent="us">🇺🇸 US</button>' +
+          '<button class="audio-btn" data-phrase="' + card.audio.replace(/"/g, '&quot;') + '" data-accent="uk">🇬🇧 UK</button>' +
+        '</div>' +
+      '</div>';
+    }
+    if (state.step >= 2) {
+      explanationStep = '<div class="fc-step explanation">' +
+        '<div class="step-label">💡 Explanation</div>' +
+        '<div class="step-text">' + card.explanation + '</div>' +
+      '</div>';
+    }
+    if (state.step >= 3) {
+      let examplesHtml = card.examples.map(ex => '<div style="margin:6px 0;">✅ ' + ex + '</div>').join('');
+      examplesStep = '<div class="fc-step examples">' +
+        '<div class="step-label">📘 Examples</div>' +
+        '<div class="step-text">' + examplesHtml + '</div>' +
+      '</div>';
+    }
+
+    el.innerHTML =
+      '<div class="fc-header" onclick="toggleCard(\'' + card.id + '\')">' +
+        '<span class="fc-icon">' + card.icon + '</span>' +
+        '<div class="fc-title-wrap">' +
+          '<div class="fc-topic">' + card.topic + '</div>' +
+          '<div class="fc-question">' + card.question + '</div>' +
+        '</div>' +
+        '<span class="fc-toggle">▼</span>' +
+      '</div>' +
+      '<span class="fc-level ' + getLevelClass(card.level) + '">' + card.level + '</span>' +
+      '<div class="fc-body">' +
+        answerStep +
+        explanationStep +
+        examplesStep +
+        '<div class="fc-actions">' +
+          (state.step < 3
+            ? '<button class="secondary" onclick="event.stopPropagation();advanceCard(\'' + card.id + '\')">' +
+                (state.step === 0 ? '▶ Reveal Answer' : state.step === 1 ? '▶ Show Explanation' : '▶ Show Examples') +
+              '</button>'
+            : '<button class="accent" onclick="event.stopPropagation();resetCard(\'' + card.id + '\')">🔄 Reset Card</button>') +
+          '<button class="light" onclick="event.stopPropagation();nextCard(\'' + card.id + '\')">⏭ Next</button>' +
+        '</div>' +
+      '</div>' +
+      dotsHtml;
+
+    grid.appendChild(el);
+  });
+
+  saveState();
+}
+
+function toggleCard(id) {
+  const state = cardState[id];
+  state.open = !state.open;
+  if (state.open && state.step === 0) {
+    state.step = 1; // auto-reveal answer on first open
+    markSectionDone('flashcards');
+  }
+  renderFlashcards();
+}
+
+function advanceCard(id) {
+  const state = cardState[id];
+  if (state.step < 3) {
+    state.step++;
+    state.open = true;
+    if (state.step >= 1) markSectionDone('flashcards');
+    renderFlashcards();
+  }
+}
+
+function resetCard(id) {
+  const state = cardState[id];
+  state.step = 0;
+  state.open = false;
+  renderFlashcards();
+}
+
+function nextCard(id) {
+  // Find the next card in the current filtered list
+  const levelFilter = document.getElementById('levelFilter').value;
+  let filtered = FLASHCARDS;
+  if (currentTab !== 'all') filtered = filtered.filter(c => c.category === currentTab);
+  if (levelFilter !== 'all') filtered = filtered.filter(c => c.level === levelFilter);
+
+  const idx = filtered.findIndex(c => c.id === id);
+  if (idx >= 0 && idx < filtered.length - 1) {
+    const nextId = filtered[idx + 1].id;
+    const nextEl = document.getElementById('fc-' + nextId);
+    if (nextEl) {
+      nextEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => {
+        if (!cardState[nextId].open) {
+          cardState[nextId].open = true;
+          if (cardState[nextId].step === 0) cardState[nextId].step = 1;
+          markSectionDone('flashcards');
+          renderFlashcards();
+        }
+      }, 300);
+    }
+  }
+}
+
+function resetAllCards() {
+  Object.keys(cardState).forEach(k => { cardState[k] = { step: 0, open: false }; });
+  renderFlashcards();
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('#tabBar button').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === tab);
+  });
+  renderFlashcards();
+  markSectionDone('flashcards');
+}
+
+/* ================================================================
+   BEHAVIORAL SAVE
+   ================================================================ */
+function saveBehavioral() {
+  const notes = document.getElementById('behavioralNotes').value.trim();
+  if (notes.length < 20) {
+    setFeedback('behavioralFb', false, 'Write a more detailed answer using STAR (at least 20 characters).');
+    return;
+  }
+  setFeedback('behavioralFb', true, 'Excellent! Your STAR answer is saved. Practice speaking it aloud without looking.');
+  localStorage.setItem('techCoachBehavioral', notes);
+  markSectionDone('star');
+}
+
+/* ================================================================
+   PRACTICE DATA
+   ================================================================ */
+const practiceData = {
+  daily: {
+    question: "Daily Scrum: What did you do yesterday, what will you do today, and are there any blockers?",
+    model: "<div class='en'>Yesterday, I refactored the authentication service and deployed it to staging. Today, I'm going to implement the caching layer for the product API to reduce latency. I'm blocked on the database migration because I need access to production credentials.</div><div class='pt'>Ontem, refatorei o serviço de autenticação e implantei em staging. Hoje, vou implementar a camada de cache para a API de produtos para reduzir latência. Estou bloqueado na migração do banco de dados porque preciso de acesso às credenciais de produção.</div>",
+    audio: "Yesterday, I refactored the authentication service and deployed it to staging. Today, I'm going to implement the caching layer for the product API to reduce latency. I'm blocked on the database migration because I need access to production credentials."
+  },
+  arch: {
+    question: "Mock Interview: Describe your microservices architecture.",
+    model: "<div class='en'>Our architecture is event-driven microservices running on Kubernetes. Services communicate through RabbitMQ. We have an API Gateway for authentication and rate limiting. Data is stored in PostgreSQL and Redis for caching. For observability, we use Prometheus and Grafana.</div><div class='pt'>Nossa arquitetura é de microsserviços orientados a eventos rodando no Kubernetes. Os serviços se comunicam através do RabbitMQ. Temos um API Gateway para autenticação e rate limiting. Os dados são armazenados em PostgreSQL e Redis para cache. Para observabilidade, usamos Prometheus e Grafana.</div>",
+    audio: "Our architecture is event-driven microservices running on Kubernetes. Services communicate through RabbitMQ. We have an API Gateway for authentication and rate limiting. Data is stored in PostgreSQL and Redis for caching. For observability, we use Prometheus and Grafana."
+  },
+  cicd: {
+    question: "Mock Interview: Describe your CI/CD pipeline.",
+    model: "<div class='en'>We use GitHub Actions for CI. On every pull request, we run linting, unit tests, and integration tests. Once merged to main, the pipeline builds a Docker image, pushes it to Amazon ECR, and deploys to staging via ArgoCD. After QA approval, we promote to production with blue-green deployment.</div><div class='pt'>Usamos GitHub Actions para CI. Em cada pull request, executamos linting, testes unitários e testes de integração. Uma vez mesclado ao main, o pipeline constrói uma imagem Docker, envia para o Amazon ECR e implanta em staging via ArgoCD. Após aprovação do QA, promovemos para produção com blue-green deployment.</div>",
+    audio: "We use GitHub Actions for CI. On every pull request, we run linting, unit tests, and integration tests. Once merged to main, the pipeline builds a Docker image, pushes it to Amazon ECR, and deploys to staging via ArgoCD. After QA approval, we promote to production with blue-green deployment."
+  },
+  bug: {
+    question: "Mock Interview: Tell me about a complex bug you solved.",
+    model: "<div class='en'>We had a memory leak in a Node.js service causing crashes every 48 hours. I used heap dumps and profiling tools to identify that a caching library was holding references to unused objects. I refactored the cache implementation and added a TTL policy. The crashes stopped completely.</div><div class='pt'>Tivemos um vazamento de memória em um serviço Node.js causando crashes a cada 48 horas. Usei heap dumps e ferramentas de profiling para identificar que uma biblioteca de cache estava mantendo referências a objetos não utilizados. Refatorei a implementação do cache e adicionei uma política de TTL. Os crashes pararam completamente.</div>",
+    audio: "We had a memory leak in a Node.js service causing crashes every 48 hours. I used heap dumps and profiling tools to identify that a caching library was holding references to unused objects. I refactored the cache implementation and added a TTL policy. The crashes stopped completely."
+  },
+  ai: {
+    question: "Mock Interview: How do you use AI in your workflow in 2026–2027?",
+    model: "<div class='en'>I use generative AI to accelerate code reviews and documentation. For example, I use Copilot for boilerplate code and unit test generation. We also use AI-powered observability tools that predict anomalies before they impact users. However, I always review AI-generated code carefully for security and correctness.</div><div class='pt'>Uso IA generativa para acelerar code reviews e documentação. Por exemplo, uso Copilot para código boilerplate e geração de testes unitários. Também usamos ferramentas de observabilidade com IA que preveem anomalias antes de impactarem os usuários. No entanto, sempre reviso cuidadosamente o código gerado por IA para segurança e correção.</div>",
+    audio: "I use generative AI to accelerate code reviews and documentation. For example, I use Copilot for boilerplate code and unit test generation. We also use AI-powered observability tools that predict anomalies before they impact users. However, I always review AI-generated code carefully for security and correctness."
+  },
+  remote: {
+    question: "Mock Interview: How do you collaborate with global teams remotely?",
+    model: "<div class='en'>I use asynchronous communication tools like Slack and Notion to keep everyone aligned across time zones. For meetings, I always share agendas and notes. I also document decisions in our wiki. When working with colleagues in different countries, I adapt my communication style and respect cultural differences.</div><div class='pt'>Uso ferramentas de comunicação assíncrona como Slack e Notion para manter todos alinhados entre fusos horários. Para reuniões, sempre compartilho agendas e notas. Também documento decisões em nosso wiki. Ao trabalhar com colegas em países diferentes, adapto meu estilo de comunicação e respeito as diferenças culturais.</div>",
+    audio: "I use asynchronous communication tools like Slack and Notion to keep everyone aligned across time zones. For meetings, I always share agendas and notes. I also document decisions in our wiki. When working with colleagues in different countries, I adapt my communication style and respect cultural differences."
+  }
+};
+
+function showPractice() {
+  const topic = document.getElementById('practiceTopic').value;
+  const data = practiceData[topic];
+  const out = document.getElementById('practiceOutput');
+  out.style.display = 'block';
+  document.getElementById('practiceQuestion').textContent = data.question;
+  document.getElementById('practiceModel').innerHTML = data.model;
+  document.getElementById('practiceAudio').innerHTML =
+    '<button class="audio-btn" data-phrase="' + data.audio.replace(/"/g, '&quot;') + '" data-accent="us">🇺🇸 US</button>' +
+    '<button class="audio-btn" data-phrase="' + data.audio.replace(/"/g, '&quot;') + '" data-accent="uk">🇬🇧 UK</button>';
+  markSectionDone('practice');
+}
+
+/* ================================================================
+   SPEAKING SAVE
+   ================================================================ */
+function saveSpeaking(){
+  const box=document.getElementById('speakingNotes');
+  const fb=document.getElementById('speakFb');
+  if(box.value.trim().length<10){
+    setFeedback('speakFb',false,'Write a few sentences first, then practice speaking them aloud.');
+  }else{
+    setFeedback('speakFb',true,'Great! Now read your sentences aloud and try to speak without looking.');
+    localStorage.setItem('techCoachSpeaking',box.value);
+  }
+  markSectionDone('practice');
+}
+
+/* ================================================================
+   QUIZ
+   ================================================================ */
+const baseQuestions=[
+ {q:'Daily Scrum — Qual é a melhor forma de descrever o que você fez ontem?',a:['I do authentication service.','Yesterday, I refactored the authentication service and deployed it to staging.','I am refactoring.','Authentication.'],c:1,e:'Use Past Simple + detalhe técnico + resultado.'},
+ {q:'Mock Interview — "Describe your architecture" — Qual resposta é mais profissional?',a:['We use microservices.','Our architecture is event-driven microservices running on Kubernetes. Services communicate through RabbitMQ.','It\'s on the cloud.','Many servers.'],c:1,e:'Inclui tecnologias específicas e padrão arquitetural.'},
+ {q:'Behavioral — O que significa STAR?',a:['Situation, Task, Action, Result','Story, Talk, Answer, Reply','Situation, Time, Action, Reason','Skill, Talent, Ability, Result'],c:0,e:'STAR = Situação, Tarefa, Ação, Resultado.'},
+ {q:'Como descrever um bug complexo que você resolveu?',a:['I fixed a bug.','We had a memory leak causing crashes. I used heap dumps to identify the issue and refactored the cache. The crashes stopped.','It was hard.','Bug fixed.'],c:1,e:'Contexto → Ação → Resultado (STAR).'},
+ {q:'DevOps — "Describe your CI/CD pipeline" — Qual resposta é mais completa?',a:['We use GitHub Actions.','We use GitHub Actions for CI. On every PR we run tests, then build and deploy to staging via ArgoCD. After QA, we promote to production.','CI/CD is important.','We deploy code.'],c:1,e:'Detalha etapas, ferramentas e fluxo.'},
+ {q:'AI (2026–2027) — Como você usa IA no seu workflow?',a:['I use ChatGPT.','I use generative AI for code reviews, test generation, and documentation, but I always review the output for security.','AI is the future.','I don\'t use AI.'],c:1,e:'Mostra uso prático e consciência dos riscos.'},
+ {q:'Qual é a melhor estrutura para responder perguntas comportamentais?',a:['Sim, não, talvez','STAR: Situação, Tarefa, Ação, Resultado','Apenas o resultado','Falar muito sem parar'],c:1,e:'STAR é a estrutura mais recomendada.'},
+ {q:'Remote Work — Como você colabora globalmente?',a:['I use email.','I use async communication like Slack and Notion, document decisions, and adapt to cultural differences.','I don\'t like remote work.','We have meetings.'],c:1,e:'Mostra adaptabilidade e uso de ferramentas.'},
+ {q:'Security — Como você garante a segurança da aplicação?',a:['We use a firewall.','We follow Zero Trust, use mutual TLS, run SAST/DAST in CI, and manage secrets with AWS Secrets Manager.','Security is important.','We have passwords.'],c:1,e:'Demonstra conhecimento de práticas modernas.'},
+ {q:'Qual é a melhor forma de descrever sua arquitetura para um stakeholder não-técnico?',a:['We use microservices and Kubernetes.','Our system is like a set of independent Lego blocks that can be replaced and scaled individually.','It\'s complex.','We have many servers.'],c:1,e:'Usa analogias para facilitar o entendimento.'}
+];
+
+let questions = [];
+let quizScore=0;
+let answered=0;
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function buildQuestions(){
+  questions = shuffle(baseQuestions).map(q => {
+    const pairs = q.a.map((text, idx) => ({text, correct: idx === q.c}));
+    const shuffledPairs = shuffle(pairs);
+    const newOptions = shuffledPairs.map(p => p.text);
+    const newCorrect = shuffledPairs.findIndex(p => p.correct);
+    return { q: q.q, a: newOptions, c: newCorrect, e: q.e };
+  });
+}
+
+function renderQuiz(){
+  buildQuestions();
+  const c=document.getElementById('quizContainer');
+  c.innerHTML='';
+  questions.forEach((item,i)=>{
+    const box=document.createElement('div');
+    box.className='exercise';
+    box.innerHTML='<h3>Question '+(i+1)+'</h3><p><strong>'+item.q+'</strong></p>';
+    item.a.forEach((ans,j)=>{
+      const b=document.createElement('button');
+      b.className='option';
+      b.textContent=String.fromCharCode(65+j)+') '+ans;
+      b.onclick=()=>answerQuiz(i,j,box);
+      box.appendChild(b);
+    });
+    const f=document.createElement('div');
+    f.className='feedback';
+    f.id='qfb'+i;
+    box.appendChild(f);
+    c.appendChild(box);
+  });
+  updateScore();
+}
+
+function answerQuiz(i,j,box){
+  const buttons=box.querySelectorAll('.option');
+  if([...buttons].some(b=>b.disabled)) return;
+  buttons.forEach(b=>b.disabled=true);
+  const correct=j===questions[i].c;
+  buttons[j].classList.add(correct?'correct':'wrong');
+  if(!correct) buttons[questions[i].c].classList.add('correct');
+  if(correct) quizScore++;
+  answered++;
+  const fb=document.getElementById('qfb'+i);
+  fb.className='feedback '+(correct?'correct':'wrong');
+  fb.textContent=(correct?'🟢 Correct! ':'🔴 Not quite. ')+questions[i].e;
+  updateScore();
+  if(answered===10) markSectionDone('quiz');
+}
+
+function updateScore(){
+  document.getElementById('score').textContent=quizScore+' / 10';
+  const msg=document.getElementById('scoreMessage');
+  if(answered===0) msg.textContent='Complete o quiz para ver seu resultado.';
+  else if(answered<10) msg.textContent='Keep going! '+answered+' of 10 answered.';
+  else if(quizScore===10) msg.textContent='🏆 Excellent! Perfect score!';
+  else if(quizScore>=8) msg.textContent='👏 Great job! Review the questions you missed.';
+  else if(quizScore>=6) msg.textContent='👍 Good start! Review the lesson and try again.';
+  else msg.textContent='📚 Keep practicing. Review the lesson and restart the quiz.';
+}
+
+function restartQuiz(){
+  quizScore=0; answered=0; renderQuiz();
+  document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+}
+
+/* ================================================================
+   INIT
+   ================================================================ */
+renderFlashcards();
+renderQuiz();
+
+/* Intersection observer for sections */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      if (['objetivos','flashcards','vocabulary','star','practice'].includes(id)) markSectionDone(id);
+    }
+  });
+}, { threshold: 0.35 });
+['objetivos','flashcards','vocabulary','star','practice'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+
+/* Load saved data */
+const savedBehavioral = localStorage.getItem('techCoachBehavioral');
+if (savedBehavioral) document.getElementById('behavioralNotes').value = savedBehavioral;
+const savedSpeaking = localStorage.getItem('techCoachSpeaking');
+if (savedSpeaking) document.getElementById('speakingNotes').value = savedSpeaking;
+
+updateProgress();
+</script>
+
+</body>
+</html>
